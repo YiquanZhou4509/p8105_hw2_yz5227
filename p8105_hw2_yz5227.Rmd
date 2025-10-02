@@ -57,6 +57,38 @@ snp.data <- snp.data %>%
     day = as.integer(day),
     month = month.name[month] #turn to month name
   )
+
+#Remove day 
+snp.data <- select(snp.data, -day)
 ```
+
+```{r}
+#Clean unemployment name
+unemp.data <- janitor::clean_names(unemp.data)
+
+#pivot longer to change the data form
+unemp.data = 
+  pivot_longer(
+    unemp.data, 
+    jan:dec,
+    names_to = "month", 
+    values_to = "unemployment")
+
+#integar year and also reformat month name
+unemp.data <- unemp.data %>%
+  mutate(
+    year = as.integer(year),
+    month_fac = factor(month, levels = tolower(month.abb), ordered = TRUE), 
+    #Since the month is abbreviation
+    #month.name would return NA, factor the month turn into numbers and then use month.name
+    month_num = as.integer(month_fac),
+    month = month.name[month_num]
+  )
+
+#select columns
+unemp.data <- unemp.data %>%
+  select(year, month, unemployment)
+```
+
 
 

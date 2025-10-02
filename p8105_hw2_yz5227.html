@@ -433,7 +433,35 @@ snp.data &lt;- snp.data %&gt;%
     month = as.integer(month),
     day = as.integer(day),
     month = month.name[month] #turn to month name
-  )</code></pre>
+  )
+
+#Remove day 
+snp.data &lt;- select(snp.data, -day)</code></pre>
+<pre class="r"><code>#Clean unemployment name
+unemp.data &lt;- janitor::clean_names(unemp.data)
+
+#pivot longer to change the data form
+unemp.data = 
+  pivot_longer(
+    unemp.data, 
+    jan:dec,
+    names_to = &quot;month&quot;, 
+    values_to = &quot;unemployment&quot;)
+
+#integar year and also reformat month name
+unemp.data &lt;- unemp.data %&gt;%
+  mutate(
+    year = as.integer(year),
+    month_fac = factor(month, levels = tolower(month.abb), ordered = TRUE), 
+    #Since the month is abbreviation
+    #month.name would return NA, factor the month turn into numbers and then use month.name
+    month_num = as.integer(month_fac),
+    month = month.name[month_num]
+  )
+
+#select columns
+unemp.data &lt;- unemp.data %&gt;%
+  select(year, month, unemployment)</code></pre>
 </div>
 
 
