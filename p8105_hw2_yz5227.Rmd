@@ -2,7 +2,9 @@
 title: "HW2"
 author: "Yiquan Zhou"
 date: "2025-10-01"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 #Load Package
 library(tidyverse)
+library(janitor)
 ```
 
 ## Problem 1
@@ -28,6 +31,14 @@ month.data <- month.data %>%
   mutate(
     year = as.integer(year),
     month = as.integer(month),
-    day = as.integer(day))
+    day = as.integer(day),
+    month = month.name[month], #turn to month name
+    president = if_else(prez_gop == 1, "gop", "dem") #president variable showing dem or gop
+    )
+
+#Column Names
+month.data_columns <- janitor::clean_names(month.data)
+
 ```
+
 

@@ -369,6 +369,13 @@ library(tidyverse)</code></pre>
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;
+## 
+## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
 <div id="problem-1" class="section level2">
 <h2>Problem 1</h2>
 <pre class="r"><code>#Load Dataset
@@ -404,7 +411,13 @@ month.data &lt;- month.data %&gt;%
   mutate(
     year = as.integer(year),
     month = as.integer(month),
-    day = as.integer(day))</code></pre>
+    day = as.integer(day),
+    month = month.name[month], #turn to month name
+    president = if_else(prez_gop == 1, &quot;gop&quot;, &quot;dem&quot;) #president variable showing dem or gop
+    )
+
+#Column Names
+month.data_columns &lt;- janitor::clean_names(month.data)</code></pre>
 </div>
 
 
