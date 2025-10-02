@@ -100,7 +100,8 @@ final_data_1 <- month.data %>%
 
 ## Problem 2
 ```{r}
-trash.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", skip = 1)
+#load the Mr Trash wheel sheet with the correct range
+trash.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N653")
 ```
 
 
