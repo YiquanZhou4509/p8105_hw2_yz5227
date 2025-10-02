@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #Load Package
 library(tidyverse)
 library(janitor)
+library(readxl)
 ```
 
 ## Problem 1
@@ -95,6 +96,11 @@ unemp.data <- unemp.data %>%
 final_data_1 <- month.data %>%
   left_join(snp.data, by = c("year","month")) %>%
   left_join(unemp.data, by = c("year","month"))
+```
+
+## Problem 2
+```{r}
+trash.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", skip = 1)
 ```
 
 
