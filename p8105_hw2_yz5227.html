@@ -376,6 +376,7 @@ library(tidyverse)</code></pre>
 ## The following objects are masked from &#39;package:stats&#39;:
 ## 
 ##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(readxl)</code></pre>
 <div id="problem-1" class="section level2">
 <h2>Problem 1</h2>
 <pre class="r"><code>#Load Dataset
@@ -466,6 +467,52 @@ unemp.data &lt;- unemp.data %&gt;%
 final_data_1 &lt;- month.data %&gt;%
   left_join(snp.data, by = c(&quot;year&quot;,&quot;month&quot;)) %&gt;%
   left_join(unemp.data, by = c(&quot;year&quot;,&quot;month&quot;))</code></pre>
+</div>
+<div id="problem-2" class="section level2">
+<h2>Problem 2</h2>
+<pre class="r"><code>#load the Mr Trash wheel sheet with the correct range
+trash.data &lt;- read_excel(&quot;./202409 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Mr. Trash Wheel&quot;, range = &quot;A2:N653&quot;)</code></pre>
+<pre class="r"><code>#Clean trash name
+trash.data &lt;- janitor::clean_names(trash.data)
+
+#Clean Trash data
+trash.data &lt;- trash.data%&gt;%
+  mutate(
+    year = as.integer(year),
+    sports_balls = as.integer(round(sports_balls)),
+    trash_wheel = &quot;Mr_Trash_Wheel&quot;
+  )</code></pre>
+<pre class="r"><code>#load the Professor Trash Wheel sheet with the correct range
+prof.data &lt;- read_excel(&quot;./202409 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Professor Trash Wheel&quot;, range = &quot;A2:M120&quot;)</code></pre>
+<pre class="r"><code>#Clean prof name
+prof.data &lt;- janitor::clean_names(prof.data)
+
+#Clean prof data
+prof.data &lt;- prof.data%&gt;%
+  mutate(
+    year = as.integer(year),
+    trash_wheel = &quot;Professor_Trash_Wheel&quot;
+  )</code></pre>
+<pre class="r"><code>#load the Gwynnda Trash Wheel sheet with the correct range
+gwy.data &lt;- read_excel(&quot;./202409 Trash Wheel Collection Data.xlsx&quot;, sheet = &quot;Gwynnda Trash Wheel&quot;, range = &quot;A2:L265&quot;)</code></pre>
+<pre class="r"><code>#Clean gwy name
+gwy.data &lt;- janitor::clean_names(gwy.data)
+
+#Clean gwy data
+gwy.data &lt;- gwy.data%&gt;%
+  mutate(
+    year = as.integer(year),
+    trash_wheel = &quot;Gwynnda_Trash_Wheel&quot;
+    )</code></pre>
+<pre class="r"><code>#merge datasets
+tidy_trash &lt;- bind_rows(trash.data, prof.data, gwy.data)
+
+#Make trash_wheel as heading 
+tidy_trash &lt;- tidy_trash %&gt;%
+  select(trash_wheel, everything())</code></pre>
+</div>
+<div id="problem-3" class="section level2">
+<h2>Problem 3</h2>
 </div>
 
 

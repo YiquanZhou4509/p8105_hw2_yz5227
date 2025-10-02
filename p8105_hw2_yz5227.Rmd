@@ -19,12 +19,14 @@ library(readxl)
 ```
 
 ## Problem 1
+
 ```{r}
 #Load Dataset
 month.data <- read_csv(file = "./fivethirtyeight_datasets/pols-month.csv")
 unemp.data <- read_csv(file = "./fivethirtyeight_datasets/unemployment.csv")
 snp.data <- read_csv(file = "./fivethirtyeight_datasets/snp.csv")
 ```
+
 ```{r}
 #Clean Month name
 month.data <- janitor::clean_names(month.data)
@@ -99,6 +101,7 @@ final_data_1 <- month.data %>%
 ```
 
 ## Problem 2
+
 ```{r}
 #load the Mr Trash wheel sheet with the correct range
 trash.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N653")
@@ -159,4 +162,22 @@ tidy_trash <- bind_rows(trash.data, prof.data, gwy.data)
 tidy_trash <- tidy_trash %>%
   select(trash_wheel, everything())
 ```
+
+## Problem 3
+
+```{r}
+#Load Data
+price.data <- read_csv("./zillow_data/Zip_zori_uc_sfrcondomfr_sm_month_NYC.csv")
+```
+
+```{r}
+#pivot longer to change the data form
+price.data <- price.data %>%
+  pivot_longer(
+    cols = 125:10,
+    names_to = "date",
+    values_to = "rent_price"
+  )
+```
+
 
