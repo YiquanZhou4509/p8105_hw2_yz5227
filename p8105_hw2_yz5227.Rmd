@@ -25,12 +25,12 @@ unemp.data <- read_csv(file = "./fivethirtyeight_datasets/unemployment.csv")
 snp.data <- read_csv(file = "./fivethirtyeight_datasets/snp.csv")
 ```
 ```{r}
-#Clean 
+#Clean Month name
 month.data <- janitor::clean_names(month.data)
 
 #Clean Month data
 month.data <- month.data %>%
-  separate(mon, into = c("year", "month","day"), sep = "-") %>%
+  separate(mon, into = c("year", "month","day"), sep = "-") %>% #separate date column into year month day
   mutate(
     year = as.integer(year),
     month = as.integer(month),
@@ -41,6 +41,22 @@ month.data <- month.data %>%
 
 #Select columns and remove gop prez and day 
 month.data <- select(month.data, -prez_dem, -prez_gop, -day)
+```
+
+```{r}
+#Clean snp name
+snp.data <- janitor::clean_names(snp.data)
+
+#Clean Month data
+snp.data <- snp.data %>%
+  mutate(date = mdy(date)) %>% #standard the date format first
+  separate(date, into = c("year", "month","day"), sep = "-") %>% #separate date column into year month day
+  mutate(
+    year = as.integer(year),
+    month = as.integer(month),
+    day = as.integer(day),
+    month = month.name[month] #turn to month name
+  )
 ```
 
 

@@ -405,12 +405,12 @@ month.data &lt;- read_csv(file = &quot;./fivethirtyeight_datasets/pols-month.csv
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>#Clean 
+<pre class="r"><code>#Clean Month name
 month.data &lt;- janitor::clean_names(month.data)
 
 #Clean Month data
 month.data &lt;- month.data %&gt;%
-  separate(mon, into = c(&quot;year&quot;, &quot;month&quot;,&quot;day&quot;), sep = &quot;-&quot;) %&gt;%
+  separate(mon, into = c(&quot;year&quot;, &quot;month&quot;,&quot;day&quot;), sep = &quot;-&quot;) %&gt;% #separate date column into year month day
   mutate(
     year = as.integer(year),
     month = as.integer(month),
@@ -421,6 +421,19 @@ month.data &lt;- month.data %&gt;%
 
 #Select columns and remove gop prez and day 
 month.data &lt;- select(month.data, -prez_dem, -prez_gop, -day)</code></pre>
+<pre class="r"><code>#Clean snp name
+snp.data &lt;- janitor::clean_names(snp.data)
+
+#Clean Month data
+snp.data &lt;- snp.data %&gt;%
+  mutate(date = mdy(date)) %&gt;% #standard the date format first
+  separate(date, into = c(&quot;year&quot;, &quot;month&quot;,&quot;day&quot;), sep = &quot;-&quot;) %&gt;% #separate date column into year month day
+  mutate(
+    year = as.integer(year),
+    month = as.integer(month),
+    day = as.integer(day),
+    month = month.name[month] #turn to month name
+  )</code></pre>
 </div>
 
 
