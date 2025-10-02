@@ -462,6 +462,10 @@ unemp.data &lt;- unemp.data %&gt;%
 #select columns
 unemp.data &lt;- unemp.data %&gt;%
   select(year, month, unemployment)</code></pre>
+<pre class="r"><code>#merge datasets
+final_data_1 &lt;- month.data %&gt;%
+  left_join(snp.data, by = c(&quot;year&quot;,&quot;month&quot;)) %&gt;%
+  left_join(unemp.data, by = c(&quot;year&quot;,&quot;month&quot;))</code></pre>
 </div>
 
 

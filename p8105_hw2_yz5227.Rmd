@@ -90,5 +90,11 @@ unemp.data <- unemp.data %>%
   select(year, month, unemployment)
 ```
 
+```{r}
+#merge datasets
+final_data_1 <- month.data %>%
+  left_join(snp.data, by = c("year","month")) %>%
+  left_join(unemp.data, by = c("year","month"))
+```
 
 
