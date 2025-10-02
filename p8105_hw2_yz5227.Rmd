@@ -111,6 +111,7 @@ trash.data <- janitor::clean_names(trash.data)
 #Clean Trash data
 trash.data <- trash.data%>%
   mutate(
+    year = as.integer(year),
     sports_balls = as.integer(round(sports_balls)),
     trash_wheel = "Mr_Trash_Wheel"
   )
@@ -128,6 +129,7 @@ prof.data <- janitor::clean_names(prof.data)
 #Clean prof data
 prof.data <- prof.data%>%
   mutate(
+    year = as.integer(year),
     trash_wheel = "Professor_Trash_Wheel"
   )
 ```
@@ -144,7 +146,13 @@ gwy.data <- janitor::clean_names(gwy.data)
 #Clean gwy data
 gwy.data <- gwy.data%>%
   mutate(
+    year = as.integer(year),
     trash_wheel = "Gwynnda_Trash_Wheel"
-  )
+    )
+```
+
+```{r}
+#merge datasets
+tidy_trash <- bind_rows(trash.data, prof.data, gwy.data)
 ```
 
