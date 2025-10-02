@@ -104,4 +104,18 @@ final_data_1 <- month.data %>%
 trash.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:N653")
 ```
 
+```{r}
+#Clean snp name
+trash.data <- janitor::clean_names(trash.data)
+
+#Clean Trash data
+trash.data <- trash.data%>%
+  mutate(
+    sports_balls = as.integer(round(sports_balls))
+  )
+```
+
+```{r}
+
+```
 
