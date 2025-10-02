@@ -25,6 +25,9 @@ unemp.data <- read_csv(file = "./fivethirtyeight_datasets/unemployment.csv")
 snp.data <- read_csv(file = "./fivethirtyeight_datasets/snp.csv")
 ```
 ```{r}
+#Clean 
+month.data <- janitor::clean_names(month.data)
+
 #Clean Month data
 month.data <- month.data %>%
   separate(mon, into = c("year", "month","day"), sep = "-") %>%
@@ -36,9 +39,8 @@ month.data <- month.data %>%
     president = if_else(prez_gop == 1, "gop", "dem") #president variable showing dem or gop
     )
 
-#Column Names
-month.data_columns <- janitor::clean_names(month.data)
-
+#Select columns and remove gop prez and day 
+month.data <- select(month.data, -prez_dem, -prez_gop, -day)
 ```
 
 

@@ -405,7 +405,10 @@ month.data &lt;- read_csv(file = &quot;./fivethirtyeight_datasets/pols-month.csv
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>#Clean Month data
+<pre class="r"><code>#Clean 
+month.data &lt;- janitor::clean_names(month.data)
+
+#Clean Month data
 month.data &lt;- month.data %&gt;%
   separate(mon, into = c(&quot;year&quot;, &quot;month&quot;,&quot;day&quot;), sep = &quot;-&quot;) %&gt;%
   mutate(
@@ -416,8 +419,8 @@ month.data &lt;- month.data %&gt;%
     president = if_else(prez_gop == 1, &quot;gop&quot;, &quot;dem&quot;) #president variable showing dem or gop
     )
 
-#Column Names
-month.data_columns &lt;- janitor::clean_names(month.data)</code></pre>
+#Select columns and remove gop prez and day 
+month.data &lt;- select(month.data, -prez_dem, -prez_gop, -day)</code></pre>
 </div>
 
 
