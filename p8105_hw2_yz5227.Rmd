@@ -154,5 +154,9 @@ gwy.data <- gwy.data%>%
 ```{r}
 #merge datasets
 tidy_trash <- bind_rows(trash.data, prof.data, gwy.data)
+
+#Make trash_wheel as heading 
+tidy_trash <- tidy_trash %>%
+  select(trash_wheel, everything())
 ```
 
