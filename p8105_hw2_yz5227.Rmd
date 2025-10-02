@@ -125,10 +125,26 @@ prof.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Pr
 #Clean prof name
 prof.data <- janitor::clean_names(prof.data)
 
-#Clean Trash data
+#Clean prof data
 prof.data <- prof.data%>%
   mutate(
     trash_wheel = "Professor_Trash_Wheel"
+  )
+```
+
+```{r}
+#load the Gwynnda Trash Wheel sheet with the correct range
+gwy.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda Trash Wheel", range = "A2:L265")
+```
+
+```{r}
+#Clean gwy name
+gwy.data <- janitor::clean_names(gwy.data)
+
+#Clean gwy data
+gwy.data <- gwy.data%>%
+  mutate(
+    trash_wheel = "Gwynnda_Trash_Wheel"
   )
 ```
 
