@@ -111,11 +111,13 @@ trash.data <- janitor::clean_names(trash.data)
 #Clean Trash data
 trash.data <- trash.data%>%
   mutate(
-    sports_balls = as.integer(round(sports_balls))
+    sports_balls = as.integer(round(sports_balls)),
+    trash_wheel = "Mr_Trash_Wheel"
   )
 ```
 
 ```{r}
-
+#load the Professor Trash Wheel sheet with the correct range
+prof.data <- read_excel("./202409 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", skip = 1)
 ```
 
