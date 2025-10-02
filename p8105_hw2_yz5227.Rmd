@@ -21,4 +21,13 @@ month.data <- read_csv(file = "./fivethirtyeight_datasets/pols-month.csv")
 unemp.data <- read_csv(file = "./fivethirtyeight_datasets/unemployment.csv")
 snp.data <- read_csv(file = "./fivethirtyeight_datasets/snp.csv")
 ```
+```{r}
+#Clean Month data
+month.data <- month.data %>%
+  separate(mon, into = c("year", "month","day"), sep = "-") %>%
+  mutate(
+    year = as.integer(year),
+    month = as.integer(month),
+    day = as.integer(day))
+```
 

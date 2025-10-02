@@ -398,6 +398,13 @@ month.data &lt;- read_csv(file = &quot;./fivethirtyeight_datasets/pols-month.csv
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>#Clean Month data
+month.data &lt;- month.data %&gt;%
+  separate(mon, into = c(&quot;year&quot;, &quot;month&quot;,&quot;day&quot;), sep = &quot;-&quot;) %&gt;%
+  mutate(
+    year = as.integer(year),
+    month = as.integer(month),
+    day = as.integer(day))</code></pre>
 </div>
 
 
